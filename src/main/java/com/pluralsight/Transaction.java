@@ -40,7 +40,7 @@ public class Transaction {
     }
 
 
-    public void DisplayDate(){
-        System.out.println(this.date + " " + this.time+ " " + this.vendor + " " + this.description + " " + this.amount);
+    public void displayTransaction(){
+        System.out.println(this.date + " " + this.time+ " " + this.description + " " + this.vendor + " " + this.amount);
     }
 }

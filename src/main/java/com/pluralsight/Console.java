@@ -48,4 +48,10 @@ public class Console {
         byte userinput = scanner.nextByte();
         return userinput;
     }
+
+    public static double PromptForDouble(String prompt) {
+        System.out.print(prompt);
+        return scanner.nextDouble();
+    }
+
 }
