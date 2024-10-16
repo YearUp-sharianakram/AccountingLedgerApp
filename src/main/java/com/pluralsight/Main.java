@@ -110,22 +110,34 @@ public class Main {
                 System.out.println(" (2)- Previous Month");
                 System.out.println(" (3)- Year To Date");
                 System.out.println(" (4)- Previous Year");
-                System.out.println(" (5)- Exit Application");
-                System.out.println(" (0)- Exit Application");
+                System.out.println(" (5)- Search by Vendor");
+                System.out.println(" (0)- Go back to Ledger Screen");
 
                 String selection = Console.PromptForString("Enter command:");
 
-                if(selection.equalsIgnoreCase("D")){
-                    getUserDepositInformation();
+                if(selection.equalsIgnoreCase("1")){
+                    int currentMonthNumber = LocalDate.now().getMonthValue();
+                    for(Transaction transaction : allTransactions){
+                        LocalDate transactionDate = transaction.getDate();
+                        if (currentMonthNumber == transactionDate.getMonthValue()){
+                            transaction.displayTransaction();
+                        }
+                    }
                 }
-                else if (selection.equalsIgnoreCase("P")){
+                else if (selection.equalsIgnoreCase("2")){
                     getUserPaymentInformation();
                 }
-                else if (selection.equalsIgnoreCase("L")){
+                else if (selection.equalsIgnoreCase("3")){
                     LedgerDisplayScreen();
                 }
-                else if (selection.equalsIgnoreCase("B")){
-                    System.out.println("Going Back to Reports Screen");
+                else if (selection.equalsIgnoreCase("4")){
+                    LedgerDisplayScreen();
+                }
+                else if (selection.equalsIgnoreCase("5")){
+                    LedgerDisplayScreen();
+                }
+                else if (selection.equalsIgnoreCase("0")){
+                    System.out.println("Going Back to Ledger Screen");
                     return;
                 }
                 else{
@@ -138,7 +150,9 @@ public class Main {
         }
 
     }
-
+    /*
+    This function will display all deposit entries from the Ledger screen if user enters D
+     */
     public static void displayDeposits(){
         for (Transaction currTransaction : allTransactions){
             if(currTransaction.getAmount() > 0) {
@@ -146,7 +160,9 @@ public class Main {
             }
         }
     }
-
+    /*
+    This function will display all payment entries from the Ledger screen if user enters P
+     */
     public static void displayPayments(){
         for (Transaction currTransaction : allTransactions){
             if(currTransaction.getAmount() < 0) {
@@ -154,7 +170,9 @@ public class Main {
             }
         }
     }
-
+    /*
+    This function will display all entries from the Ledger screen if user enters A
+     */
     public static void displayAll(){
         for (Transaction currTransaction : allTransactions){
             currTransaction.displayTransaction();
@@ -177,6 +195,9 @@ public class Main {
 
     }
 
+    /*
+    This will receive the payment information from the user, it will make sure that the payment is negative
+     */
     public static void getUserPaymentInformation(){
 
 
@@ -192,6 +213,9 @@ public class Main {
         writeToFile(transaction);
 
     }
+    /*
+    This function will be used to write to the csv file whenever the user wants to deposit or make a payment
+     */
 
     public static void writeToFile(Transaction transaction){
 
