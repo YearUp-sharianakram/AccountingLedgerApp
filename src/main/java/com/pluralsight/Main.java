@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class Main {
@@ -115,7 +116,7 @@ public class Main {
 
                 String selection = Console.PromptForString("Enter command:");
 
-                if(selection.equalsIgnoreCase("1")){
+                if(selection.equals("1")){
                     int currentMonthNumber = LocalDate.now().getMonthValue();
                     for(Transaction transaction : allTransactions){
                         LocalDate transactionDate = transaction.getDate();
@@ -124,17 +125,41 @@ public class Main {
                         }
                     }
                 }
-                else if (selection.equalsIgnoreCase("2")){
-                    getUserPaymentInformation();
+                else if (selection.equals("2")){
+                    LocalDate current = LocalDate.now();
+                    int previousMonthNumber = (current.getMonthValue()) - 1;
+                    for(Transaction transaction : allTransactions){
+                        LocalDate transactionDate = transaction.getDate();
+                        if ((previousMonthNumber == transactionDate.getMonthValue()) && (current.getYear() == transactionDate.getYear())){
+                            transaction.displayTransaction();
+                        }
+                    }
                 }
-                else if (selection.equalsIgnoreCase("3")){
-                    LedgerDisplayScreen();
+                else if (selection.equals("3")){
+                    int currentYearNumber = (LocalDate.now().getYear()) ;
+                    for(Transaction transaction : allTransactions){
+                        LocalDate transactionDate = transaction.getDate();
+                        if (currentYearNumber == transactionDate.getYear()){
+                            transaction.displayTransaction();
+                        }
+                    }
                 }
-                else if (selection.equalsIgnoreCase("4")){
-                    LedgerDisplayScreen();
+                else if (selection.equals("4")){
+                    int previousYearNumber = (LocalDate.now().getYear()) - 1;
+                    for(Transaction transaction : allTransactions){
+                        LocalDate transactionDate = transaction.getDate();
+                        if (previousYearNumber == transactionDate.getYear()){
+                            transaction.displayTransaction();
+                        }
+                    }
                 }
-                else if (selection.equalsIgnoreCase("5")){
-                    LedgerDisplayScreen();
+                else if (selection.equals("5")){
+                    String vendorName = Console.PromptForString("What is the name of the vendor that you would like to view the previous transactions of?");
+                    for(Transaction transaction : allTransactions){
+                        if (vendorName.equals(transaction.getVendor())){
+                            transaction.displayTransaction();
+                        }
+                    }
                 }
                 else if (selection.equalsIgnoreCase("0")){
                     System.out.println("Going Back to Ledger Screen");

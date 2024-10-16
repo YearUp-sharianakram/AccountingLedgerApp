@@ -51,7 +51,9 @@ public class Console {
 
     public static double PromptForDouble(String prompt) {
         System.out.print(prompt);
-        return scanner.nextDouble();
+        double userinput = scanner.nextDouble();
+        scanner.nextLine();
+        return userinput;
     }
 
 }
