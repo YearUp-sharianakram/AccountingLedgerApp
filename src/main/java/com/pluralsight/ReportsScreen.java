@@ -2,13 +2,14 @@ package com.pluralsight;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class ReportsScreen {
     public static void reportsScreen(){
 
         while(true){
             try{
-                System.out.println("Which reports would you like to view?");
+                System.out.println("\nWhich reports would you like to view?");
                 System.out.println(" (1)- Month to Date");
                 System.out.println(" (2)- Previous Month");
                 System.out.println(" (3)- Year To Date");
@@ -17,7 +18,7 @@ public class ReportsScreen {
                 System.out.println(" (0)- Go back to Ledger Screen");
 
                 String selection = Console.PromptForString("Enter command:");
-
+                HomeScreen.allTransactions.sort(Comparator.comparing(Transaction::getDate).thenComparing(Transaction::getTime).reversed());
                 if(selection.equals("1")){
                     reportsMonthToDate();
                 }
@@ -52,7 +53,7 @@ public class ReportsScreen {
         ArrayList<Transaction> currList = new ArrayList<Transaction>();
 
         int currentMonthNumber = LocalDate.now().getMonthValue();
-        for(Transaction transaction : allTransactions){
+        for(Transaction transaction : HomeScreen.allTransactions){
             LocalDate transactionDate = transaction.getDate();
             if (currentMonthNumber == transactionDate.getMonthValue()){
                 currList.add(transaction);
@@ -66,7 +67,7 @@ public class ReportsScreen {
 
         LocalDate current = LocalDate.now();
         int previousMonthNumber = (current.getMonthValue()) - 1;
-        for(Transaction transaction : allTransactions){
+        for(Transaction transaction : HomeScreen.allTransactions){
             LocalDate transactionDate = transaction.getDate();
             if ((previousMonthNumber == transactionDate.getMonthValue()) && (current.getYear() == transactionDate.getYear())){
                 currList.add(transaction);
@@ -79,7 +80,7 @@ public class ReportsScreen {
         ArrayList<Transaction> currList = new ArrayList<Transaction>();
 
         int currentYearNumber = (LocalDate.now().getYear()) ;
-        for(Transaction transaction : allTransactions){
+        for(Transaction transaction : HomeScreen.allTransactions){
             LocalDate transactionDate = transaction.getDate();
             if (currentYearNumber == transactionDate.getYear()){
                 currList.add(transaction);
@@ -92,7 +93,7 @@ public class ReportsScreen {
         ArrayList<Transaction> currList = new ArrayList<Transaction>();
 
         int previousYearNumber = (LocalDate.now().getYear()) - 1;
-        for(Transaction transaction : allTransactions){
+        for(Transaction transaction : HomeScreen.allTransactions){
             LocalDate transactionDate = transaction.getDate();
             if (previousYearNumber == transactionDate.getYear()){
                 currList.add(transaction);
@@ -104,8 +105,8 @@ public class ReportsScreen {
     public static void reportsSearchByVendor(){
         ArrayList<Transaction> currList = new ArrayList<Transaction>();
 
-        String vendorName = Console.PromptForString("What is the name of the vendor that you would like to view the previous transactions of?");
-        for(Transaction transaction : allTransactions){
+        String vendorName = Console.PromptForString("Name of Vendor: ");
+        for(Transaction transaction : HomeScreen.allTransactions){
             if (vendorName.equals(transaction.getVendor())){
                 currList.add(transaction);
             }

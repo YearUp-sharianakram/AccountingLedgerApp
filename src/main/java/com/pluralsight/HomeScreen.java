@@ -2,6 +2,8 @@ package com.pluralsight;
 
 
 
+import jdk.jfr.Description;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -9,6 +11,8 @@ import java.io.FileWriter;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.regex.Pattern;
 
 public class HomeScreen {
@@ -16,7 +20,8 @@ public class HomeScreen {
     public static ArrayList<Transaction> allTransactions = getTransactions();
 
     public static void main(String[] args) {
-       homeScreen();
+//       homeScreen();
+        customSearch();
 
 //        displayAll();
 //        displayPayments();
@@ -39,7 +44,7 @@ public class HomeScreen {
     public static void homeScreen(){
         while(true){
             try{
-                System.out.println("Welcome to the Accounting Ledger App!\n");
+                System.out.println("\nWelcome to the Accounting Ledger App!");
                 System.out.println("How may we help you today?");
                 System.out.println(" (D)- Make a Deposit");
                 System.out.println(" (P)- Make a Payment");
@@ -47,6 +52,8 @@ public class HomeScreen {
                 System.out.println(" (X)- Exit Application");
 
                 String selection = Console.PromptForString("Enter command:");
+                allTransactions.sort(Comparator.comparing(Transaction::getDate).thenComparing(Transaction::getTime).reversed());
+
 
                 if(selection.equalsIgnoreCase("D")){
                     getUserDepositInformation();
@@ -79,12 +86,12 @@ public class HomeScreen {
     after they have chose option D.
      */
     public static void getUserDepositInformation(){
-        System.out.println("Please fill out the following information to continue with your deposit: ");
-        String description  = Console.PromptForString("Please give a Description: ");
-        String vendor = Console.PromptForString("Who is the vendor?");
+        System.out.println("Please fill out the following information to continue with your deposit");
+        String description  = Console.PromptForString("Description: ");
+        String vendor = Console.PromptForString("Vendor:");
         double amount;
         do {
-            amount = personalUtil.roundDouble(Console.PromptForDouble("How much?"), 2);
+            amount = personalUtil.roundDouble(Console.PromptForDouble("Amount:"), 2);
         }while(amount == 0);
 
         LocalDate currentDate = LocalDate.now();
@@ -93,6 +100,7 @@ public class HomeScreen {
         Transaction transaction = new Transaction(currentDate, currentTime, description, vendor, amount);
         allTransactions.add(transaction);
         writeToFile(transaction);
+        System.out.println("Successful Deposit!");
 
     }
 
@@ -100,20 +108,22 @@ public class HomeScreen {
     This will receive the payment information from the user, it will make sure that the payment is negative
      */
     public static void getUserPaymentInformation(){
-
-        String description  = Console.PromptForString("Please give a Description: ");
-        String vendor = Console.PromptForString("Who is the vendor?");
+        System.out.println("Please fill out the following information to continue with your deposit");
+        String description  = Console.PromptForString("Description: ");
+        String vendor = Console.PromptForString("Vendor: ");
         double amount;
         do {
-            amount = personalUtil.roundDouble(Console.PromptForDouble("How much?"), 2);
+            amount = personalUtil.roundDouble(Console.PromptForDouble("Amount: "), 2);
         }while(amount == 0);
 
+        amount = amount * -1;
         LocalDate currentDate = LocalDate.now();
         LocalTime currentTime = LocalTime.now().withNano(0);
 
         Transaction transaction = new Transaction(currentDate, currentTime, description, vendor, amount);
         allTransactions.add(transaction);
         writeToFile(transaction);
+        System.out.println("Successful Payment!");
     }
 
     /*
@@ -161,6 +171,33 @@ public class HomeScreen {
         return transactions;
     }
 
+
+    public static void customSearch(){
+        String startDate = (Console.PromptForString("Start Date: "));
+        String endDate = (Console.PromptForString("End Date: "));
+    //    LocalDate startDate = LocalDate.parse(Console.PromptForString("Start Date: "));
+    //    LocalDate endDate = LocalDate.parse(Console.PromptForString("End Date: "));
+        String userDescription = Console.PromptForString("Description:");
+        String userVendor = Console.PromptForString("Vendor: ");
+        double minAmount = Console.PromptForDouble("Minimum Amount: ");
+        double maxAmount = Console.PromptForDouble("Maximum Amount: ");
+
+//        ArrayList<Transaction> currList = new ArrayList<Transaction>();
+//
+//        for (Transaction transaction : allTransactions){
+//            if((startDate.isBefore(transaction.getDate()) || startDate.isEqual(transaction.getDate())) && (endDate.isAfter(transaction.getDate()) || endDate.isEqual(transaction.getDate()))
+//                            &&
+//                    transaction.getDescription().startsWith(userDescription)
+//                            &&
+//                    transaction.getVendor().startsWith(userVendor)
+//                            &&
+//                    transaction.getAmount() >= minAmount && transaction.getAmount() <= maxAmount
+//            ){
+//                currList.add(transaction);
+//            }
+//        }
+//        personalUtil.displayFormat("Custom Search Report", currList);
+    }
 }
 
 

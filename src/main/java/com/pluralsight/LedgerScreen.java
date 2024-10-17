@@ -1,13 +1,14 @@
 package com.pluralsight;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class LedgerScreen
 {
     public static void displayScreen(){
         while(true){
             try{
-                System.out.println("Which previous transactions would you like to view?");
+                System.out.println("\nWhich previous transactions would you like to view?");
                 System.out.println(" (A)- All");
                 System.out.println(" (D)- Deposits");
                 System.out.println(" (P)- Payments");
@@ -15,6 +16,8 @@ public class LedgerScreen
                 System.out.println(" (H)- Go to Home Screen");
 
                 String selection = Console.PromptForString("Enter command:");
+
+                HomeScreen.allTransactions.sort(Comparator.comparing(Transaction::getDate).thenComparing(Transaction::getTime).reversed());
 
                 if(selection.equalsIgnoreCase("A")){
                     displayAll();
@@ -26,7 +29,7 @@ public class LedgerScreen
                     displayPayments();
                 }
                 else if (selection.equalsIgnoreCase("R")){
-                    reportsScreen();
+                    ReportsScreen.reportsScreen();
                 }
                 else if (selection.equalsIgnoreCase("H")){
                     return;
@@ -46,12 +49,8 @@ This function will display all entries from the Ledger screen if user enters A
  */
     public static void displayAll(){
 
-        ArrayList<Transaction> currList = new ArrayList<Transaction>();
 
-        for (Transaction currTransaction : HomeScreen.allTransactions){
-            currList.add(currTransaction);
-        }
-        personalUtil.displayFormat("All Entries", currList);
+        personalUtil.displayFormat("All Entries", HomeScreen.allTransactions);
 
 
     }
