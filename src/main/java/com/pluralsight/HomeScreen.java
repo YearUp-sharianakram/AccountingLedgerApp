@@ -20,8 +20,8 @@ public class HomeScreen {
     public static ArrayList<Transaction> allTransactions = getTransactions();
 
     public static void main(String[] args) {
-//       homeScreen();
-        customSearch();
+       homeScreen();
+//        customSearch();
 
 //        displayAll();
 //        displayPayments();
@@ -172,19 +172,35 @@ public class HomeScreen {
     }
 
 
-    public static void customSearch(){
-        String startDate = (Console.PromptForString("Start Date: "));
-        String endDate = (Console.PromptForString("End Date: "));
-    //    LocalDate startDate = LocalDate.parse(Console.PromptForString("Start Date: "));
-    //    LocalDate endDate = LocalDate.parse(Console.PromptForString("End Date: "));
-        String userDescription = Console.PromptForString("Description:");
-        String userVendor = Console.PromptForString("Vendor: ");
-        double minAmount = Console.PromptForDouble("Minimum Amount: ");
-        double maxAmount = Console.PromptForDouble("Maximum Amount: ");
-
+//    public static void customSearch(){
+//        String startDateString = (Console.PromptForString("Start Date: "));
+//        String endDateString = (Console.PromptForString("End Date: "));
+//    //    LocalDate startDate = LocalDate.parse(Console.PromptForString("Start Date: "));
+//    //    LocalDate endDate = LocalDate.parse(Console.PromptForString("End Date: "));
+//        String userDescription = Console.PromptForString("Description:");
+//        String userVendor = Console.PromptForString("Vendor: ");
+//        String minAmount = Console.PromptForString("Minimum Amount: ");
+//        String maxAmount = Console.PromptForString("Maximum Amount: ");
+//
 //        ArrayList<Transaction> currList = new ArrayList<Transaction>();
 //
 //        for (Transaction transaction : allTransactions){
+//            if(!startDateString.isEmpty()){
+//                LocalDate startDate = LocalDate.parse(startDateString);
+//                if(!(startDate.isBefore(transaction.getDate()) || startDate.isEqual(transaction.getDate()))){
+//                    continue;
+//                }
+//            }
+//
+//            if (!endDateString.isEmpty()){
+//                LocalDate endDate = LocalDate.parse(endDateString);
+//                if(!(endDate.isAfter(transaction.getDate()) || endDate.isEqual(transaction.getDate())){
+//
+//                }
+//            }
+//
+//
+//
 //            if((startDate.isBefore(transaction.getDate()) || startDate.isEqual(transaction.getDate())) && (endDate.isAfter(transaction.getDate()) || endDate.isEqual(transaction.getDate()))
 //                            &&
 //                    transaction.getDescription().startsWith(userDescription)
@@ -197,7 +213,7 @@ public class HomeScreen {
 //            }
 //        }
 //        personalUtil.displayFormat("Custom Search Report", currList);
-    }
+//    }
 }
 
 

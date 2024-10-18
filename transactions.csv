@@ -1,23 +1,25 @@
 date|time|description|vendor|amount
 2023-04-15|10:13:25|ergonomic keyboard|Amazon|-89.50
 2023-04-15|11:15:01|Invoice 1001 paid|Joe|1500.00
-2024-10-17|09:05:42|apple|ShopRite|12.5
-2024-10-17|09:09:34|orange|Keyfood|5.43
-2024-10-17|09:10:32|carrot|Shoprite|12.5
-2024-10-17|09:20:26|Thank you for the money|Josh|30.0
-2024-09-17|09:41:41|testing zero amount|amazon|-12.0
-2024-10-16|09:42:23|test zero amount 1|kevin|0.01
-2024-10-17|10:02:41|apple|Grocery Store|10.5
-2024-10-17|14:02:27|Cheese|KeyFood|1.0
-2024-09-15|10:13:25|keyboard|Amazon|40.0
-2024-10-17|14:11:35|a|a|3.0
-2024-10-17|14:27:27|X|D|12.0
-2024-10-17|14:27:57|W|E|10.0
-2024-10-17|14:28:23|a|w|21.0
-2024-10-17|14:29:08|q|q|-12.0
-2024-10-17|14:31:28|t|t|13.0
-2024-10-17|14:31:37|i|i|-9.0
-2024-10-17|14:33:23|c|c|23.0
-2024-10-17|15:10:08|apple|amazon|3.0
-2024-10-17|15:11:15|e|e|1.0
-2024-10-17|15:11:44|b|b|-5.0
+2023-04-16|09:30:45|grocery shopping|Walmart|-120.75
+2023-04-16|12:00:10|monthly salary|Company XYZ|3000.00
+2023-04-17|14:25:55|utility bill payment|Con Edison|-200.00
+2023-04-23|17:40:10|electricity bill|Power Corp|-150.00
+2023-04-23|09:05:30|printer ink purchase|Staples|-35.00
+2023-04-24|10:00:50|tax refund|IRS|1200.00
+2023-04-24|14:45:05|online course fee|Udemy|-50.00
+2023-04-25|11:15:22|refund for headphones|Amazon|45.00
+2024-09-01|09:00:00|groceries|Target|-145.00
+2024-09-05|14:10:25|software license|Microsoft|-99.99
+2024-09-19|11:25:45|subscription renewal|Netflix|-15.99
+2024-09-22|15:10:00|utilities payment|Water Company|-95.00
+2024-09-25|09:55:12|payment received|Alice|800.00
+2024-10-01|08:20:30|groceries|Walmart|-160.00
+2024-10-03|14:30:00|car insurance|Progressive|-250.00
+2024-10-11|16:05:30|rent payment|Landlord|-1300.00
+2024-10-12|09:40:45|freelance project|Freelance Client|950.00
+2024-10-17|21:28:16|apple|Keyfood|1.25
+2024-10-17|21:28:33|Birthday Gift|Bob|-25.0
+2024-10-17|21:30:50|Birthday Gift|Bob|25.0
+2024-10-17|21:31:12|apple|Keyfood|-1.25
+2024-10-17|21:34:08|SONY headphones|Amazon|-20.0
