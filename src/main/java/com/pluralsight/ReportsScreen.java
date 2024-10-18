@@ -118,57 +118,61 @@ public class ReportsScreen {
         personalUtil.displayFormat("Reports from " + vendorName, currList);
     }
 
-    public static void customSearch(){
-        String startDateString = (Console.PromptForString("Start Date(YYYY-MM-DD) or press enter to skip: "));
-        String endDateString = (Console.PromptForString("End Date(YYYY-MM-DD) or press enter to skip: "));
-        String userDescription = Console.PromptForString("Description or press enter to skip:");
-        String userVendor = Console.PromptForString("Vendor or press enter to skip: ");
-        String minAmountUser = Console.PromptForString("Minimum Amount or press enter to skip: ");
-        String maxAmountUser = Console.PromptForString("Maximum Amount or press enter to skip: ");
+    public static void customSearch() {
+        try {
+            String startDateString = (Console.PromptForString("Start Date(YYYY-MM-DD) or press enter to skip: "));
+            String endDateString = (Console.PromptForString("End Date(YYYY-MM-DD) or press enter to skip: "));
+            String userDescription = Console.PromptForString("Description or press enter to skip:");
+            String userVendor = Console.PromptForString("Vendor or press enter to skip: ");
+            String minAmountUser = Console.PromptForString("Minimum Amount or press enter to skip: ");
+            String maxAmountUser = Console.PromptForString("Maximum Amount or press enter to skip: ");
 
-        ArrayList<Transaction> currList = new ArrayList<Transaction>();
+            ArrayList<Transaction> currList = new ArrayList<Transaction>();
 
-        for (Transaction transaction : HomeScreen.allTransactions){
-            if(!startDateString.isEmpty()){
-                LocalDate startDate = LocalDate.parse(startDateString);
-                if(!(startDate.isBefore(transaction.getDate()) || startDate.isEqual(transaction.getDate()))){
-                    continue;
+            for (Transaction transaction : HomeScreen.allTransactions) {
+                if (!startDateString.isEmpty()) {
+                    LocalDate startDate = LocalDate.parse(startDateString);
+                    if (!(startDate.isBefore(transaction.getDate()) || startDate.isEqual(transaction.getDate()))) {
+                        continue;
+                    }
                 }
-            }
 
-            if (!endDateString.isEmpty()){
-                LocalDate endDate = LocalDate.parse(endDateString);
-                if(!(endDate.isAfter(transaction.getDate()) || endDate.isEqual(transaction.getDate()))){
-                    continue;
+                if (!endDateString.isEmpty()) {
+                    LocalDate endDate = LocalDate.parse(endDateString);
+                    if (!(endDate.isAfter(transaction.getDate()) || endDate.isEqual(transaction.getDate()))) {
+                        continue;
+                    }
                 }
-            }
-            if(!userDescription.isEmpty()){
-                if(!transaction.getDescription().startsWith(userDescription)){
-                    continue;
+                if (!userDescription.isEmpty()) {
+                    if (!transaction.getDescription().startsWith(userDescription)) {
+                        continue;
+                    }
                 }
-            }
-            if(!userVendor.isEmpty()){
-                if(!transaction.getVendor().startsWith(userVendor)){
-                    continue;
+                if (!userVendor.isEmpty()) {
+                    if (!transaction.getVendor().startsWith(userVendor)) {
+                        continue;
+                    }
                 }
-            }
-            if(!minAmountUser.isEmpty()){
-                double minAmount = Double.parseDouble(minAmountUser);
-                if(!(transaction.getAmount() >= minAmount)){
-                    continue;
+                if (!minAmountUser.isEmpty()) {
+                    double minAmount = Double.parseDouble(minAmountUser);
+                    if (!(transaction.getAmount() >= minAmount)) {
+                        continue;
+                    }
                 }
-            }
-            if(!maxAmountUser.isEmpty()){
-                double maxAmount = Double.parseDouble(maxAmountUser);
-                if(!(transaction.getAmount() <= maxAmount)){
-                    continue;
+                if (!maxAmountUser.isEmpty()) {
+                    double maxAmount = Double.parseDouble(maxAmountUser);
+                    if (!(transaction.getAmount() <= maxAmount)) {
+                        continue;
+                    }
                 }
-            }
-            currList.add(transaction);
+                currList.add(transaction);
 
 
+            }
+            personalUtil.displayFormat("Custom Search Report", currList);
+        } catch (Exception e) {
+            System.out.println("Unable to do Custom Search");
         }
-        personalUtil.displayFormat("Custom Search Report", currList);
     }
 
 
